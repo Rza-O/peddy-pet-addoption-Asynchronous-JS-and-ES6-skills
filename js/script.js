@@ -48,7 +48,7 @@ const categoriesByButton = (categories) => {
     categories.forEach(category => {
         console.log(category)
         const categoriesBtn = document.createElement('button');
-        categoriesBtn.classList.add('btn', 'btn-lg', 'text-2xl', 'rounded-2xl');
+        categoriesBtn.classList.add('btn', 'btn-lg','text-2xl', 'rounded-2xl', 'bg-transparent', 'border-2');
         categoriesBtn.innerHTML = `<img src="${category.category_icon}" alt=""></img> ${category.category}`;
         categoryBtnContainer.append(categoriesBtn);
     });
