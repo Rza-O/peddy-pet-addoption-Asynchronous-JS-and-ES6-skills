@@ -56,18 +56,18 @@ The following APIs are available in Peddy:
 
 - **Left Side**:
   - Display 4 dynamic categories below the section title and subtitle, fetched from the provided API.
-  - Add a "Sort By Price" button on the right, with a subtitle on the left, as per the design.
-  - By default, show all available pets, with the active category styled according to Figma.
+  - Add a "Sort By Price" button on the right, with a subtitle on the left, as per the design.✅
+  - By default, show all available pets, with the active category styled according to Figma.✅
   - After clicking on a category, fetch and display pets from that category in a grid layout.
   - If no pets are available for a category, show a meaningful message.
-  - Each card must display the following:
-    - Thumbnail/Image
-    - Pet Name
-    - Breed
-    - Birth Date
-    - Gender
-    - Price
-    - Buttons: "Like", "Adopt", and "Details"
+  - Each card must display the following:✅
+    - Thumbnail/Image✅
+    - Pet Name✅
+    - Breed✅
+    - Birth Date✅
+    - Gender✅
+    - Price✅
+    - Buttons: "Like", "Adopt", and "Details"✅
   - If any field is missing from the API response, handle it by displaying a placeholder or meaningful message.
 - **Right Side**:
   - Clicking the "Like" button should add the pet's thumbnail to the right-side grid.
