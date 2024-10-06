@@ -42,15 +42,15 @@ The following APIs are available in Peddy:
 
 ### 1. **Navbar**
 
-- Implement the navbar as per the Figma design.
-- Ensure it is responsive across Desktop, Tablet, and Mobile devices.
-- The navbar should collapse into a mobile menu on smaller screens.
+- Implement the navbar as per the Figma design.✅
+- Ensure it is responsive across Desktop, Tablet, and Mobile devices.✅
+- The navbar should collapse into a mobile menu on smaller screens.✅
 
 ### 2. **Banner Section**
 
-- Design the banner section as per Figma design.
+- Design the banner section as per Figma design.✅
 - Include a "View More" button that, when clicked, scrolls down to the “Adopt Your Best Friend” section.
-- Ensure the banner is fully responsive.
+- Ensure the banner is fully responsive.✅
 
 ### 3. **Adopt Your Best Friend Section**
 
