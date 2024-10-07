@@ -44,19 +44,28 @@ const detailsModal = async (id) => {
         modal.className = 'modal modal-bottom sm:modal-middle';
         modal.innerHTML = `
         <div class="modal-box">
-            <div class="mb-5 object-cover"><img class=" rounded-lg h-full w-full" src=${petData.image} alt=""></div>
+            <div class="mb-5 object-cover"><img class=" rounded-lg h-full w-full" src=${petData.image} alt="">
+            </div>
             <h3 class=" mb-5 text-2xl font-extrabold">${petData?.pet_name ?? 'Not Mentioned'}</h3>
             <div class=" flex gap-4">
                 <div>
                     <p class="mb-1"><i class="fa-solid fa-grip"></i> Breed: ${petData?.breed ?? 'Not Mentioned'}</p>
                     <p class="mb-1"><i class="fa-regular fa-calendar"></i> Birth: ${petData?.date_of_birth ?? new Date('2024-06-18').getFullYear()}</p>
-                    <p><i class="fa-solid fa-mercury"></i> Vaccination Status: ${petData?.vaccinated_status ?? 'Not Mentioned'}</p>
+                    <p class="mb-3"><i class="fa-solid fa-mercury"></i> Vaccination Status: ${petData?.vaccinated_status ?? 'Not Mentioned'}</p>
                 </div>
                 <div>
                     <p class="mb-1"><i class="fa-solid fa-mercury"></i> Gender: ${petData?.gender ?? 'Not Mentioned'}</p>
-                    <p><i class="fa-solid fa-dollar-sign"></i> Price: ${petData?.price ?? 'Not Mentioned$'}</p>
+                    <p class="mb-2"><i class="fa-solid fa-dollar-sign"></i> Price: ${petData?.price ?? 'Not Mentioned$'}</p>
                 </div>
-            </div>
+                </div>
+                <hr>
+                <div>
+                    <h5 class="mt-3 font-extrabold">Details Information</h5>
+                    <p class="mt-3 font-light">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. 
+                        <ul class="list-disc ml-4 mt-2 font-light">
+                            <li>The point of using is that it has a more-or-less normal distribution of letters, as opposed to using.</li>
+                        </ul></p>
+                </div> 
             <div class="modal-action">
                 <form action="dialog">
                     <button class="btn bg-[#e6f1f2] border border-[#cde2e5] text-primary">Close</button>
