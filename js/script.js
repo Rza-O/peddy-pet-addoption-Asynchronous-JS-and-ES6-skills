@@ -27,12 +27,56 @@ const showAllPets = (pets) => {
                         <div class="flex justify-center gap-4 items-center p-2">
                         <button id="like-card-btn" onclick="likeBtnFn('${pet.image}')" class="btn btn-ghost border-2 border-solid border-gray-200 "><i class="fa-regular fa-thumbs-up"></i></button>
                         <button id="adopt-card-btn" class="btn btn-ghost border-2 border-solid border-gray-200 text-primary">Adopt</button>
-                        <button id="details-card-btn" class="btn btn-ghost border-2 border-solid border-gray-200 text-primary">Details</button>
+                        <button id="details-card-btn" onclick="detailsModal('${pet.petId}')" class="btn btn-ghost border-2 border-solid border-gray-200 text-primary">Details</button>
                         </div>
         `;
         cardContainer.append(card);
     });
 }
+// Details Button Functionality
+const detailsModal = async (id) => {
+    try {
+        const res = await fetch(` https://openapi.programming-hero.com/api/peddy/pet/${id}`);
+        const {petData} = await res.json();
+        console.log(petData);
+        const modal = document.createElement('dialog');
+        modal.id = 'my_modal_5';
+        modal.className = 'modal modal-bottom sm:modal-middle';
+        modal.innerHTML = `
+        <div class="modal-box">
+            <div class="mb-5 object-cover"><img class=" rounded-lg h-full w-full" src=${petData.image} alt=""></div>
+            <h3 class=" mb-5 text-2xl font-extrabold">${petData?.pet_name ?? 'Not Mentioned'}</h3>
+            <div class=" flex gap-4">
+                <div>
+                    <p class="mb-1"><i class="fa-solid fa-grip"></i> Breed: ${petData?.breed ?? 'Not Mentioned'}</p>
+                    <p class="mb-1"><i class="fa-regular fa-calendar"></i> Birth: ${petData?.date_of_birth ?? new Date('2024-06-18').getFullYear()}</p>
+                    <p><i class="fa-solid fa-mercury"></i> Vaccination Status: ${petData?.vaccinated_status ?? 'Not Mentioned'}</p>
+                </div>
+                <div>
+                    <p class="mb-1"><i class="fa-solid fa-mercury"></i> Gender: ${petData?.gender ?? 'Not Mentioned'}</p>
+                    <p><i class="fa-solid fa-dollar-sign"></i> Price: ${petData?.price ?? 'Not Mentioned$'}</p>
+                </div>
+            </div>
+            <div class="modal-action">
+                <form action="dialog">
+                    <button class="btn bg-[#e6f1f2] border border-[#cde2e5] text-primary">Close</button>
+                </form>
+            </div>
+        </div>
+        `;
+        document.body.appendChild(modal);
+        modal.showModal();
+        const closeBtn = modal.querySelector('button');
+        closeBtn.addEventListener('click', () => {
+            event.preventDefault();
+            modal.close();
+            modal.remove();
+        });
+    } catch (error) {
+    console.log("This is the error message: ", error);    
+    }
+}
+
 loadAllPets();
 
 // Like Button Behavior Function
@@ -41,14 +85,11 @@ const likeBtnFn = (image) => {
     const likedImgContainer = document.getElementById('liked-img-container');
     likedImgContainer.classList.add('grid', 'grid-cols-2', 'gap-6', 'p-5', 'auto-rows-min')
     const imgDiv = document.createElement('div');
-    // imgDiv.classList.add('grid', 'grid-cols-2', 'gap-6', 'p-5')
-    imgDiv.classList.add('p-2', 'border');
+    imgDiv.classList.add('p-2', 'border', 'rounded-lg');
     imgDiv.innerHTML = `
-    <img class="object-cover" src="${image}" alt=""></img>
+    <img class="object-cover rounded-lg" src="${image}" alt=""></img>
     `;
     likedImgContainer.append(imgDiv);
-    // parentElement.insertBefore(newChild, parentElement.firstChild);
-    // likedImgContainer.insertBefore(imgDiv, likedImgContainer.firstChild)
 }
 
 // fetching pets by category
@@ -110,9 +151,9 @@ const categoryClickHandler = async (category) => {
                 showAllPets(data.data);
             }
         }
-        // catch (err) {
-        //     console.log(err);
-        // }
+        catch (err) {
+            console.log(err);
+        }
         finally {
             spinner.classList.add('hidden');
         }
