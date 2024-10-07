@@ -11,7 +11,7 @@ const showAllPets = (pets) => {
     const cardContainer = document.getElementById('pets-card-container');
     cardContainer.innerHTML = '';
     pets.forEach(pet => {
-        // console.log(pet);
+        console.log(pet);
         const card = document.createElement('div');
         card.classList.add('border-2', 'rounded-xl');
         card.innerHTML = `
@@ -19,21 +19,37 @@ const showAllPets = (pets) => {
                         <div class="p-5 flex flex-col gap-2">
                             <h3 class="text-2xl font-extrabold">${pet?.pet_name ?? 'Not Mentioned'}</h3>
                             <p><i class="fa-solid fa-grip"></i> Breed: ${pet?.breed ?? 'Not Mentioned'}</p>
-                            <p><i class="fa-regular fa-calendar"></i> Birth: ${pet?.date_of_birth ?? 'Not Mentioned'}</p>
+                            <p><i class="fa-regular fa-calendar"></i> Birth: ${pet?.date_of_birth ?? new Date('2024-06-18').getFullYear()}</p>
                             <p><i class="fa-solid fa-mercury"></i> Gender: ${pet?.gender ?? 'Not Mentioned'}</p>
                             <p><i class="fa-solid fa-dollar-sign"></i> Price: ${pet?.price ?? 'Not Mentioned$'}</p>
                         </div>
                         <hr>
                         <div class="flex justify-center gap-4 items-center p-2">
-                        <button class="btn btn-ghost border-2 border-solid border-gray-200 "><i class="fa-regular fa-thumbs-up"></i></button>
-                        <button class="btn btn-ghost border-2 border-solid border-gray-200 text-primary">Adopt</button>
-                        <button class="btn btn-ghost border-2 border-solid border-gray-200 text-primary">Details</button>
+                        <button id="like-card-btn" onclick="likeBtnFn('${pet.image}')" class="btn btn-ghost border-2 border-solid border-gray-200 "><i class="fa-regular fa-thumbs-up"></i></button>
+                        <button id="adopt-card-btn" class="btn btn-ghost border-2 border-solid border-gray-200 text-primary">Adopt</button>
+                        <button id="details-card-btn" class="btn btn-ghost border-2 border-solid border-gray-200 text-primary">Details</button>
                         </div>
         `;
         cardContainer.append(card);
     });
 }
 loadAllPets();
+
+// Like Button Behavior Function
+const likeBtnFn = (image) => {
+    console.log(image);
+    const likedImgContainer = document.getElementById('liked-img-container');
+    likedImgContainer.classList.add('grid', 'grid-cols-2', 'gap-6', 'p-5', 'auto-rows-min')
+    const imgDiv = document.createElement('div');
+    // imgDiv.classList.add('grid', 'grid-cols-2', 'gap-6', 'p-5')
+    imgDiv.classList.add('p-2', 'border');
+    imgDiv.innerHTML = `
+    <img class="object-cover" src="${image}" alt=""></img>
+    `;
+    likedImgContainer.append(imgDiv);
+    // parentElement.insertBefore(newChild, parentElement.firstChild);
+    // likedImgContainer.insertBefore(imgDiv, likedImgContainer.firstChild)
+}
 
 // fetching pets by category
 const loadPetsCategories = async () => {
@@ -51,7 +67,7 @@ const categoriesButton = (categories) => {
         const categoriesBtn = document.createElement('button');
         // categoriesBtn.setAttribute('id', `${category.category}`);
         // removeActiveClass();
-        const activeBtn = document.getElementById(`btn-${category.category}`);
+        // const activeBtn = document.getElementById(`btn-${category.category}`);
         // activeBtn.classList.add('active');
         categoriesBtn.classList.add('btn', 'btn-lg', 'text-2xl', 'rounded-2xl', 'bg-transparent', 'border-2');
         categoriesBtn.innerHTML = `<img src="${category.category_icon}" alt=""></img> ${category.category}`;
@@ -69,7 +85,7 @@ const categoriesButton = (categories) => {
 // Active Button function
 const btnActive = (active) => {
     const buttons = document.querySelectorAll('#categories-btn-container button');
-    buttons.forEach(button =>{
+    buttons.forEach(button => {
         button.classList.remove('bg-[#e6f1f2]', 'border-primary');
     });
     active.classList.add('bg-[#e6f1f2]', 'border-primary');
@@ -116,6 +132,5 @@ const emptyBirdMessage = () => {
         <p class="text-center text-lg font-light">We're currently out of birds. Please check back with us soon for availability updates. If you have any questions or would like to be notified when birds are back in stock, feel free to contact our customer service team.</p>
     `;
     cardContainer.append(errorMessage);
-
 }
 
