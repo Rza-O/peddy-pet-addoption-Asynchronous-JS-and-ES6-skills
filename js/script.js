@@ -7,8 +7,9 @@ const loadAllPets = async () => {
 
 
 const showAllPets = (pets) => {
-    // console.log(pets);
+    console.log(pets);
     const cardContainer = document.getElementById('pets-card-container');
+    cardContainer.innerHTML = '';
     pets.forEach(pet => {
         // console.log(pet);
         const card = document.createElement('div');
@@ -35,21 +36,34 @@ const showAllPets = (pets) => {
 loadAllPets();
 
 // fetching pets by category
-const loadPetsCategories = async() => {
+const loadPetsCategories = async () => {
     const response = await fetch("https://openapi.programming-hero.com/api/peddy/categories");
     const data = await response.json();
-    categoriesByButton(data.categories);
+    categoriesButton(data.categories);
 }
 loadPetsCategories();
 
-const categoriesByButton = (categories) => {
+const categoriesButton = (categories) => {
     // console.log(categories);
     const categoryBtnContainer = document.getElementById('categories-btn-container');
     categories.forEach(category => {
-        console.log(category)
+        // console.log(category)
         const categoriesBtn = document.createElement('button');
-        categoriesBtn.classList.add('btn', 'btn-lg','text-2xl', 'rounded-2xl', 'bg-transparent', 'border-2');
+        categoriesBtn.classList.add('btn', 'btn-lg', 'text-2xl', 'rounded-2xl', 'bg-transparent', 'border-2');
         categoriesBtn.innerHTML = `<img src="${category.category_icon}" alt=""></img> ${category.category}`;
+        // categoryBtnContainer.innerHTML = `<button class="btn btn-lg text-2xl rounded-2xl bg-transparent border-2"><img src="${category.category_icon}" alt=""></img> ${category.category}</button>`;
+
+        // Adding onclick handler to the button
+        categoriesBtn.onclick = () => {
+            categoryClickHandler(category);
+        }
         categoryBtnContainer.append(categoriesBtn);
     });
+}
+
+// Loading Category by button
+const categoryClickHandler = async(category) => {
+    const response = await fetch(`https://openapi.programming-hero.com/api/peddy/category/${category.category}`);
+    const data = await response.json();
+    showAllPets(data.data);
 }
