@@ -47,7 +47,7 @@ const categoriesButton = (categories) => {
     // console.log(categories);
     const categoryBtnContainer = document.getElementById('categories-btn-container');
     categories.forEach(category => {
-        // console.log(category)
+        console.log(category)
         const categoriesBtn = document.createElement('button');
         categoriesBtn.classList.add('btn', 'btn-lg', 'text-2xl', 'rounded-2xl', 'bg-transparent', 'border-2');
         categoriesBtn.innerHTML = `<img src="${category.category_icon}" alt=""></img> ${category.category}`;
@@ -62,8 +62,45 @@ const categoriesButton = (categories) => {
 }
 
 // Loading Category by button
-const categoryClickHandler = async(category) => {
-    const response = await fetch(`https://openapi.programming-hero.com/api/peddy/category/${category.category}`);
-    const data = await response.json();
-    showAllPets(data.data);
+const categoryClickHandler = async (category) => {
+    const spinner = document.getElementById('spinner');
+    const cardContainer = document.getElementById('pets-card-container');
+    cardContainer.innerHTML = '';
+    spinner.classList.remove('hidden');
+    cardContainer.classList.remove('bg-[#f8f8f8]')
+    cardContainer.classList.add('grid');
+    setTimeout(async () => {
+        try {
+            const response = await fetch(`https://openapi.programming-hero.com/api/peddy/category/${category.category}`);
+            const data = await response.json();
+            if (category.category === 'Bird') {
+                emptyBirdMessage();
+            }
+            else {
+                showAllPets(data.data);
+            }
+        }
+        // catch (err) {
+        //     console.log(err);
+        // }
+        finally {
+            spinner.classList.add('hidden');
+        }
+    }, 2000);
+}
+
+const emptyBirdMessage = () => {
+    const cardContainer = document.getElementById('pets-card-container');
+    cardContainer.innerHTML = '';
+    cardContainer.classList.remove('grid');
+    cardContainer.classList.add('bg-[#f8f8f8]', 'flex', 'justify-center');
+    const errorMessage = document.createElement('div');
+    errorMessage.classList.add('flex', 'flex-col', 'justify-center', 'items-center', 'p-20');
+    errorMessage.innerHTML = `
+        <img class="mb-7" src="./images/error.webp" alt=""></img>
+        <h2 class="text-center text-2xl font-extrabold mb-5">No information Available</h2>
+        <p class="text-center text-lg font-light">We're currently out of birds. Please check back with us soon for availability updates. If you have any questions or would like to be notified when birds are back in stock, feel free to contact our customer service team.</p>
+    `;
+    cardContainer.append(errorMessage);
+
 }
