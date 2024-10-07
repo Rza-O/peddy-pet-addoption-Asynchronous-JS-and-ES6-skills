@@ -55,11 +55,11 @@ The following APIs are available in Peddy:
 ### 3. **Adopt Your Best Friend Section**
 
 - **Left Side**:
-  - Display 4 dynamic categories below the section title and subtitle, fetched from the provided API.
+  - Display 4 dynamic categories below the section title and subtitle, fetched from the provided API.✅
   - Add a "Sort By Price" button on the right, with a subtitle on the left, as per the design.✅
   - By default, show all available pets, with the active category styled according to Figma.✅
-  - After clicking on a category, fetch and display pets from that category in a grid layout.
-  - If no pets are available for a category, show a meaningful message.
+  - After clicking on a category, fetch and display pets from that category in a grid layout.✅
+  - If no pets are available for a category, show a meaningful message.✅
   - Each card must display the following:✅
     - Thumbnail/Image✅
     - Pet Name✅
@@ -68,7 +68,7 @@ The following APIs are available in Peddy:
     - Gender✅
     - Price✅
     - Buttons: "Like", "Adopt", and "Details"✅
-  - If any field is missing from the API response, handle it by displaying a placeholder or meaningful message.
+  - If any field is missing from the API response, handle it by displaying a placeholder or meaningful message.✅
 - **Right Side**:
   - Clicking the "Like" button should add the pet's thumbnail to the right-side grid.
   - Display a 2-column layout for liked pet thumbnails.
@@ -92,7 +92,7 @@ The following APIs are available in Peddy:
 
 ### 1. **Loading Spinner**
 
-- Display a loading spinner for at least 2 seconds when fetching data from the API.
+- Display a loading spinner for at least 2 seconds when fetching data from the API.✅
 
 ### 2. **Sort by Price**
 
@@ -104,7 +104,7 @@ The following APIs are available in Peddy:
 
 ### 4. **Handle Null or Undefined Values**
 
-- If any values from the API (e.g., pet breed, birth date) are null or undefined, display a placeholder or relevant message instead of leaving it blank.
+- If any values from the API (e.g., pet breed, birth date) are null or undefined, display a placeholder or relevant message instead of leaving it blank.✅
 
 ## 5. A beautiful README.md File
 

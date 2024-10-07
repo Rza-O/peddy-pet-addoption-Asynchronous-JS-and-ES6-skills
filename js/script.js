@@ -7,7 +7,7 @@ const loadAllPets = async () => {
 
 
 const showAllPets = (pets) => {
-    console.log(pets);
+    // console.log(pets);
     const cardContainer = document.getElementById('pets-card-container');
     cardContainer.innerHTML = '';
     pets.forEach(pet => {
@@ -47,8 +47,12 @@ const categoriesButton = (categories) => {
     // console.log(categories);
     const categoryBtnContainer = document.getElementById('categories-btn-container');
     categories.forEach(category => {
-        console.log(category)
+        // console.log(category)
         const categoriesBtn = document.createElement('button');
+        // categoriesBtn.setAttribute('id', `${category.category}`);
+        // removeActiveClass();
+        const activeBtn = document.getElementById(`btn-${category.category}`);
+        // activeBtn.classList.add('active');
         categoriesBtn.classList.add('btn', 'btn-lg', 'text-2xl', 'rounded-2xl', 'bg-transparent', 'border-2');
         categoriesBtn.innerHTML = `<img src="${category.category_icon}" alt=""></img> ${category.category}`;
         // categoryBtnContainer.innerHTML = `<button class="btn btn-lg text-2xl rounded-2xl bg-transparent border-2"><img src="${category.category_icon}" alt=""></img> ${category.category}</button>`;
@@ -56,9 +60,19 @@ const categoriesButton = (categories) => {
         // Adding onclick handler to the button
         categoriesBtn.onclick = () => {
             categoryClickHandler(category);
+            btnActive(categoriesBtn);
         }
         categoryBtnContainer.append(categoriesBtn);
     });
+}
+
+// Active Button function
+const btnActive = (active) => {
+    const buttons = document.querySelectorAll('#categories-btn-container button');
+    buttons.forEach(button =>{
+        button.classList.remove('bg-[#e6f1f2]', 'border-primary');
+    });
+    active.classList.add('bg-[#e6f1f2]', 'border-primary');
 }
 
 // Loading Category by button
@@ -104,3 +118,4 @@ const emptyBirdMessage = () => {
     cardContainer.append(errorMessage);
 
 }
+
