@@ -1,12 +1,8 @@
-let petsData = [];
 // Fetching All pets for the Landing page
 const loadAllPets = async () => {
     const response = await fetch('https://openapi.programming-hero.com/api/peddy/pets');
     const data = await response.json();
-    // console.log(data);
-    // showAllPets(data.pets);
-    petsData = data.pets;
-    showAllPets(petsData);
+    showAllPets(data.pets);
 }
 
 
@@ -15,7 +11,7 @@ const showAllPets = (pets) => {
     const cardContainer = document.getElementById('pets-card-container');
     cardContainer.innerHTML = '';
     pets.forEach(pet => {
-        // console.log(pet);
+        console.log(pet);
         const card = document.createElement('div');
         card.classList.add('border-2', 'rounded-xl');
         card.innerHTML = `
@@ -61,7 +57,7 @@ const adoptedBtn = (btn) => {
         countdownValue--;
         countdownElement.textContent = countdownValue;
 
-        if(countdownValue <= 0) {
+        if (countdownValue <= 0) {
             clearInterval(countdownInterval);
             modal.classList.remove('modal-open');
             document.body.removeChild(modal);
@@ -123,7 +119,7 @@ const detailsModal = async (id) => {
             modal.close();
             modal.remove();
         });
-    } 
+    }
     catch (error) {
         console.log("This is the error message: ", error);
     }
@@ -219,22 +215,3 @@ const emptyBirdMessage = () => {
     cardContainer.append(errorMessage);
 }
 
-// Sort by price Functionality
-
-const sortByPrice = () => {
-    const cardContainer = document.getElementById('pets-card-container');
-    const spinner = document.getElementById('spinner');
-    cardContainer.innerHTML = '';
-    spinner.classList.remove('hidden');
-    setTimeout(()=>{
-        try {
-            const sortedPets = [...petsData].sort((a, b) => b.price - a.price);
-            showAllPets(sortedPets);
-        } catch(error){
-            console.log('Error Message: ', error);
-        }
-        finally{
-            spinner.classList.add('hidden');
-        }
-    },2000);
-}
