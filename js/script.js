@@ -3,19 +3,15 @@ let petsData = [];
 const loadAllPets = async () => {
     const response = await fetch('https://openapi.programming-hero.com/api/peddy/pets');
     const data = await response.json();
-    // console.log(data);
-    // showAllPets(data.pets);
     petsData = data.pets;
     showAllPets(petsData);
 }
 
 
 const showAllPets = (pets) => {
-    // console.log(pets);
     const cardContainer = document.getElementById('pets-card-container');
     cardContainer.innerHTML = '';
     pets.forEach(pet => {
-        // console.log(pet);
         const card = document.createElement('div');
         card.classList.add('border-2', 'rounded-xl');
         card.innerHTML = `

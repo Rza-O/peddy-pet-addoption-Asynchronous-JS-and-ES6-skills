@@ -110,11 +110,11 @@ The following APIs are available in Peddy:
 
 Ensure the final project includes a `README.md` file with the following details:
 
-- Project name.
-- Short description of the project.
-- 5 key features of the project.
-- ES6 features used.
-- Live link to the deployed project.
+- Project name.✅
+- Short description of the project.✅
+- 5 key features of the project.✅
+- ES6 features used.✅
+- Live link to the deployed project.✅
 
 ## What to Submit
 
