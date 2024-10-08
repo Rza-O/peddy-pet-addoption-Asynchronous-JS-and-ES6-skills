@@ -29,11 +29,11 @@ const showAllPets = (pets) => {
                         </div>
                         <hr>
                         <div class="flex justify-center gap-4 items-center p-2">
-                        <button id="like-card-btn" onclick="likeBtnFn('${pet.image}')" class="btn btn-ghost border-2 border-solid border-gray-200 "><i class="fa-regular fa-thumbs-up"></i></button>
+                        <button id="like-card-btn" onclick="likeBtnFn('${pet.image}')" class="btn btn-sm btn-ghost border-2 border-solid border-gray-200 "><i class="fa-regular fa-thumbs-up"></i></button>
 
-                        <button id="adopt-card-btn" onclick="adoptedBtn(this)" class="btn btn-ghost border-2 border-solid border-gray-200 text-primary">Adopt</button>
+                        <button id="adopt-card-btn" onclick="adoptedBtn(this)" class="btn btn-sm btn-ghost border-2 border-solid border-gray-200 text-primary">Adopt</button>
                         
-                        <button id="details-card-btn" onclick="detailsModal('${pet.petId}')" class="btn btn-ghost border-2 border-solid border-gray-200 text-primary">Details</button>
+                        <button id="details-card-btn" onclick="detailsModal('${pet.petId}')" class="btn btn-sm btn-ghost border-2 border-solid border-gray-200 text-primary">Details</button>
                         </div>
         `;
         cardContainer.append(card);
