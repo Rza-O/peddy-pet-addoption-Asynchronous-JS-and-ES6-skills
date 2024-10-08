@@ -26,18 +26,56 @@ const showAllPets = (pets) => {
                         <hr>
                         <div class="flex justify-center gap-4 items-center p-2">
                         <button id="like-card-btn" onclick="likeBtnFn('${pet.image}')" class="btn btn-ghost border-2 border-solid border-gray-200 "><i class="fa-regular fa-thumbs-up"></i></button>
-                        <button id="adopt-card-btn" class="btn btn-ghost border-2 border-solid border-gray-200 text-primary">Adopt</button>
+
+                        <button id="adopt-card-btn" onclick="adoptedBtn(this)" class="btn btn-ghost border-2 border-solid border-gray-200 text-primary">Adopt</button>
+                        
                         <button id="details-card-btn" onclick="detailsModal('${pet.petId}')" class="btn btn-ghost border-2 border-solid border-gray-200 text-primary">Details</button>
                         </div>
         `;
         cardContainer.append(card);
     });
 }
+
+// Adopted Button Functionality
+const adoptedBtn = (btn) => {
+    const modal = document.createElement('div');
+    modal.classList.add('modal', 'modal-open');
+
+    modal.innerHTML = `
+    <div class="modal-box flex flex-col justify-center text-center">
+    <img class="w-14 mx-auto" src="./images/handshake.gif" alt=""></img>
+    <h2 class="font-extrabold text-4xl mb-3">Congrats</h2>
+    <p>Adoption Process is Started For Your Pet</p>
+    <p id="countdown" class="text-4xl font-bold mt-4">3</p>
+    </div>
+    `;
+    document.body.appendChild(modal);
+
+    const countdownElement = document.getElementById('countdown');
+    let countdownValue = 3;
+    const countdownInterval = setInterval(() => {
+        countdownValue--;
+        countdownElement.textContent = countdownValue;
+
+        if(countdownValue <= 0) {
+            clearInterval(countdownInterval);
+            modal.classList.remove('modal-open');
+            document.body.removeChild(modal);
+
+            btn.textContent = 'Adopted';
+            btn.disabled = true;
+            btn.classList.add('btn-disabled');
+            btn.classList.remove('text-primary');
+        }
+    }, 1000);
+}
+
+
 // Details Button Functionality
 const detailsModal = async (id) => {
     try {
         const res = await fetch(` https://openapi.programming-hero.com/api/peddy/pet/${id}`);
-        const {petData} = await res.json();
+        const { petData } = await res.json();
         console.log(petData);
         const modal = document.createElement('dialog');
         modal.id = 'my_modal_5';
@@ -81,8 +119,9 @@ const detailsModal = async (id) => {
             modal.close();
             modal.remove();
         });
-    } catch (error) {
-    console.log("This is the error message: ", error);    
+    } 
+    catch (error) {
+        console.log("This is the error message: ", error);
     }
 }
 
@@ -110,20 +149,12 @@ const loadPetsCategories = async () => {
 loadPetsCategories();
 
 const categoriesButton = (categories) => {
-    // console.log(categories);
     const categoryBtnContainer = document.getElementById('categories-btn-container');
     categories.forEach(category => {
-        // console.log(category)
         const categoriesBtn = document.createElement('button');
-        // categoriesBtn.setAttribute('id', `${category.category}`);
-        // removeActiveClass();
-        // const activeBtn = document.getElementById(`btn-${category.category}`);
-        // activeBtn.classList.add('active');
         categoriesBtn.classList.add('btn', 'btn-lg', 'text-2xl', 'rounded-2xl', 'bg-transparent', 'border-2');
         categoriesBtn.innerHTML = `<img src="${category.category_icon}" alt=""></img> ${category.category}`;
-        // categoryBtnContainer.innerHTML = `<button class="btn btn-lg text-2xl rounded-2xl bg-transparent border-2"><img src="${category.category_icon}" alt=""></img> ${category.category}</button>`;
 
-        // Adding onclick handler to the button
         categoriesBtn.onclick = () => {
             categoryClickHandler(category);
             btnActive(categoriesBtn);
