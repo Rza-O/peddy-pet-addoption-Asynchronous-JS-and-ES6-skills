@@ -152,8 +152,8 @@ const categoriesButton = (categories) => {
     const categoryBtnContainer = document.getElementById('categories-btn-container');
     categories.forEach(category => {
         const categoriesBtn = document.createElement('button');
-        categoriesBtn.classList.add('btn', 'btn-lg', 'text-2xl', 'rounded-2xl', 'bg-transparent', 'border-2');
-        categoriesBtn.innerHTML = `<img src="${category.category_icon}" alt=""></img> ${category.category}`;
+        categoriesBtn.classList.add('btn', 'btn-lg', 'sm:text-lg', 'md:text-2xl', 'rounded-2xl', 'bg-transparent', 'border-2');
+        categoriesBtn.innerHTML = `<img class="object-cover" src="${category.category_icon}" alt=""></img> ${category.category}`;
 
         categoriesBtn.onclick = () => {
             categoryClickHandler(category);
